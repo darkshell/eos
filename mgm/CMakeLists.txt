@@ -122,6 +122,10 @@ add_library(
   proc/user/Version.cc
   proc/user/Who.cc
   proc/user/Whoami.cc
+  proc/admin/GroupCmd.cc
+  proc/admin/GroupCmd.hh
+  proc/admin/IoCmd.cc
+  proc/admin/IoCmd.hh
   Quota.cc
   Scheduler.cc
   Vid.cc

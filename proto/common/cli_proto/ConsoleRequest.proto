@@ -10,6 +10,8 @@ import "Rm.proto";
 import "StagerRm.proto";
 import "Route.proto";
 import "Recycle.proto";
+import "Group.proto";
+import "Io.proto";
 
 //------------------------------------------------------------------------------
 // Request message sent to the server
@@ -28,7 +30,7 @@ message RequestProto {
   // Actual request data object
   oneof command {
     AclProto acl           = 2;
-    NsProto  ns            = 3;
+    NsProto ns             = 3;
     DrainProto drain       = 4;
     FindProto find         = 5;
     FsProto fs             = 6;
@@ -36,6 +38,8 @@ message RequestProto {
     StagerRmProto stagerRm = 8;
     RouteProto route       = 9;
     RecycleProto recycle   = 10;
+    GroupProto group       = 11;
+    IoProto io             = 12;
   }
 
   string Comment = 30;

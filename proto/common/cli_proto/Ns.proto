@@ -28,12 +28,12 @@ message NsProto {
       FILES_REPAIR = 3;
       DIRS_REPAIR  = 4;
       ALL_REPAIR   = 5;
-   }
+    }
 
-   bool On = 1;
-   CompactType type = 2;
-   int64 Delay    = 3;
-   int64 Interval = 4;
+    bool On = 1;
+    CompactType Type = 2;
+    int64 Delay    = 3;
+    int64 Interval = 4;
   }
 
   message MasterProto {

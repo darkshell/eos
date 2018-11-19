@@ -75,10 +75,12 @@ extern int com_fuse(char*);
 extern int com_fusex(char*);
 extern int com_geosched(char*);
 extern int com_group(char*);
+extern int com_protogroup(char*);   //
 extern int com_health(char*);
 extern int com_help(char*);
 extern int com_info(char*);
 extern int com_io(char*);
+extern int com_protoio(char*);      //
 extern int com_json(char*);
 extern int com_license(char*);
 extern int com_ln(char*);
@@ -145,11 +147,13 @@ COMMAND commands[] = {
   { (char*) "fuse", com_fuse, (char*) "Fuse Mounting"},
   { (char*) "fusex", com_fusex, (char*) "Fuse(x) Administration"},
   { (char*) "geosched", com_geosched, (char*) "Geoscheduler Interface"},
-  { (char*) "group", com_group, (char*) "Group configuration"},
+  // { (char*) "group", com_group, (char*) "Group configuration"},
+  { (char*) "group", com_protogroup, (char*) "Group configuration"},
   { (char*) "health", com_health, (char*) "Health information about system"},
   { (char*) "help", com_help, (char*) "Display this text"},
   { (char*) "info", com_info, (char*) "Retrieve file or directory information"},
-  { (char*) "io", com_io, (char*) "IO Interface"},
+  // { (char*) "io", com_io, (char*) "IO Interface"},
+  { (char*) "io", com_protoio, (char*) "IO Interface"},
   { (char*) "json", com_json, (char*) "Toggle JSON output flag for stdout"},
   { (char*) "license", com_license, (char*) "Display Software License"},
   { (char*) "ls", com_ls, (char*) "List a directory"},

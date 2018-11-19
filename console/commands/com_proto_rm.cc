@@ -26,20 +26,19 @@
 #include "console/ConsoleMain.hh"
 #include "console/commands/ICmdHelper.hh"
 
-extern int com_rm(char*);
+extern int com_rm(char *);
+
 void com_rm_help();
 
 //------------------------------------------------------------------------------
 //! Class RmHelper
 //------------------------------------------------------------------------------
-class RmHelper: public ICmdHelper
-{
+class RmHelper : public ICmdHelper {
 public:
   //----------------------------------------------------------------------------
   //! Constructor
   //----------------------------------------------------------------------------
-  RmHelper()
-  {
+  RmHelper() {
     mIsAdmin = false;
     mHighlight = true;
   }
@@ -56,14 +55,13 @@ public:
   //!
   //! @return true if successful, otherwise false
   //----------------------------------------------------------------------------
-  bool ParseCommand(const char* arg) override;
+  bool ParseCommand(const char *arg) override;
 };
 
 bool
-RmHelper::ParseCommand(const char* arg)
-{
+RmHelper::ParseCommand(const char *arg) {
   XrdOucString option;
-  eos::console::RmProto* rm = mReq.mutable_rm();
+  eos::console::RmProto *rm = mReq.mutable_rm();
   eos::common::StringTokenizer tokenizer(arg);
   tokenizer.GetLine();
 
@@ -130,8 +128,7 @@ RmHelper::ParseCommand(const char* arg)
 //------------------------------------------------------------------------------
 // Rm command entry point
 //------------------------------------------------------------------------------
-int com_protorm(char* arg)
-{
+int com_protorm(char *arg) {
   if (wants_help(arg)) {
     com_rm_help();
     global_retc = EINVAL;
@@ -165,10 +162,10 @@ int com_protorm(char* arg)
   return global_retc;
 }
 
-void com_rm_help()
-{
+void com_rm_help() {
   std::ostringstream oss;
-  oss << "Usage: rm [-r|-rf|-rF] [--no-recycle-bin|-F] [<path>|fid:<fid-dec>|fxid:<fid-hex>|cid:<cid-dec>|cxid:<cid-hex>]"
+  oss
+      << "Usage: rm [-r|-rf|-rF] [--no-recycle-bin|-F] [<path>|fid:<fid-dec>|fxid:<fid-hex>|cid:<cid-dec>|cxid:<cid-hex>]"
       << std::endl
       << "            -r | -rf : remove files/directories recursively" << std::endl
       << "                     - the 'f' option is a convenience option with no additional functionality!"
@@ -180,8 +177,8 @@ void com_rm_help()
       << std::endl << std::endl
       << "            -rF | Fr : remove files/directories recursively bypassing recycling policies"
       << std::endl
-      << "                     - you have to take the root role to use this flag!" <<
-      std::endl
+      << "                     - you have to take the root role to use this flag!"
+      << std::endl
       << "                     - the recursive flag is automatically removed it the target is a file!"
       << std::endl;
   std::cerr << oss.str() << std::endl;

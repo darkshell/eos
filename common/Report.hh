@@ -51,7 +51,8 @@ EOSCOMMONNAMESPACE_BEGIN
 //! Class storing file transaction reports constructed by a FST report string
 /*----------------------------------------------------------------------------*/
 
-class Report {
+class Report
+{
   // ---------------------------------------------------------------------------
   // the creator of the XrdOucEnv input is defined in XrdFstOfsFile.hh MakeReportEnv
   // ---------------------------------------------------------------------------
@@ -115,7 +116,7 @@ public:
   unsigned long long dsize; //< size of a delete file
   unsigned long long dc_ts;  //< timestamp of change time
   unsigned long long dc_tns;  //< timestamp of change time
-  unsigned long long dm_ts;  //< timestamp of access time 
+  unsigned long long dm_ts;  //< timestamp of access time
   unsigned long long dm_tns;  //< timestamp of access time
   unsigned long long da_ts;  //< timestamp of access time
   unsigned long long da_tns;  //< timestamp of access time
@@ -134,7 +135,7 @@ public:
   // ---------------------------------------------------------------------------
   //! Constructor by report env
   // ---------------------------------------------------------------------------
-  Report(XrdOucEnv &report);
+  Report(XrdOucEnv& report);
 
   // ---------------------------------------------------------------------------
   //! Destructor
@@ -144,7 +145,8 @@ public:
   // ---------------------------------------------------------------------------
   //! Dump the report contents into a string
   // ---------------------------------------------------------------------------
-  void Dump(XrdOucString &out, bool dumpsec=false);
+  void Dump(XrdOucString& out, bool dumpsec = false);
+  void Dump(std::string& out, bool dumpsec = false);
 };
 
 /*----------------------------------------------------------------------------*/

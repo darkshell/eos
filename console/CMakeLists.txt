@@ -112,7 +112,9 @@ add_library(
   #@todo (esindril) drop com_recycle when we drop beryl_aquamarine
   commands/com_recycle.cc
   commands/com_proto_recycle.cc
-  commands/com_stagerrm.cc)
+  commands/com_stagerrm.cc
+  commands/com_proto_group.cc
+  commands/com_proto_io.cc)
 
 add_dependencies(EosConsoleCommands-Objects EosCliProto-Objects)
 add_dependencies(EosConsoleCommands-Objects EosFstProto-Objects)

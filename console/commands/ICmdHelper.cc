@@ -51,7 +51,8 @@ ICmdHelper::Execute(bool printError)
 }
 
 int
-ICmdHelper::ExecuteWithoutPrint() {
+ICmdHelper::ExecuteWithoutPrint()
+{
   if (!mReq.command_case()) {
     std::cerr << "error: generic request object not populated with command"
               << std::endl;
@@ -67,14 +68,17 @@ ICmdHelper::ExecuteWithoutPrint() {
 
   std::string cmd = "mgm.cmd.proto=";
   cmd += b64buff;
-  if (getenv("EOS_ROUTE"))
-  {
+
+  if (getenv("EOS_ROUTE")) {
     XrdOucString route = getenv("EOS_ROUTE");
-    while(route.replace("&","#AND#")){}
+
+    while (route.replace("&", "#AND#")) {}
+
     cmd += "&eos.route=";
     cmd += route.c_str();
     unsetenv("EOS_ROUTE");
   }
+
   return mMgmExec.ExecuteCommand(cmd.c_str(), mIsAdmin);
 }
 
@@ -121,7 +125,6 @@ ICmdHelper::ConfirmOperation()
 
   out << "Confirm operation by typing => " << confirmation << std::endl;
   out << "                            => ";
-
   std::string userInput;
   std::cout << out.str();
   getline(std::cin, userInput);
@@ -142,7 +145,8 @@ ICmdHelper::NeedsConfirmation()
 }
 
 std::string
-ICmdHelper::GetResult() {
+ICmdHelper::GetResult()
+{
   // Add new line if necessary
   std::string out = mMgmExec.GetResult();
 
@@ -154,6 +158,20 @@ ICmdHelper::GetResult() {
 }
 
 std::string
-ICmdHelper::GetError() {
+ICmdHelper::GetError()
+{
   return mMgmExec.GetError();
 }
+
+// #TODO put tokenizer and token as class field
+bool
+ICmdHelper::next_token(eos::common::StringTokenizer& tokenizer,
+                       std::string& token)
+{
+  if (!(token = tokenizer.GetSToken()).length()) {
+    return false;
+  } else {
+    return true;
+  }
+}
+

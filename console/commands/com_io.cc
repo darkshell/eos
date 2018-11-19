@@ -121,7 +121,7 @@ com_io(char* arg1)
           }
         }
       } while (1);
-    } else {
+    } else { // enable, disable, stat, report
       do {
         option = subtokenizer.GetToken();
 

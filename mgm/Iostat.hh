@@ -226,8 +226,12 @@ public:
   void PrintOut(XrdOucString& out, bool summary, bool details, bool monitoring,
                 bool numerical = false, bool top = false, bool domain = false,
                 bool apps = false, XrdOucString option = "");
+  void PrintOut(std::string& out, bool summary, bool details, bool monitoring,
+                bool numerical = false, bool top = false, bool domain = false,
+                bool apps = false);
 
   void PrintNs(XrdOucString& out, XrdOucString option = "");
+  void PrintNs(std::string& out, std::string option = "");
 
   void UdpBroadCast(eos::common::Report*);
 
@@ -250,6 +254,8 @@ public:
 
   static bool NamespaceReport(const char* path, XrdOucString& stdOut,
                               XrdOucString& stdErr);
+  static bool NamespaceReport(const char* path, std::string& stdOut,
+                              std::string& stdErr);
 
   void
   AddToPopularity(std::string path, unsigned long long rb, time_t starttime,

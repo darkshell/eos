@@ -90,6 +90,18 @@ public:
   const char* GetToken(bool escapeand = true);
 
   //----------------------------------------------------------------------------
+  //! Return next parsed space separated token taking into account escaped
+  //! blanks and quoted strings
+  //!
+  //! @param escapeand if true escape & with #AND# !! UGLY!!
+  //!
+  //! @return next token or a void string "" if no token found
+  //----------------------------------------------------------------------------
+  std::string GetSToken(bool escapeand =
+                          true); // #TODO will substitute GetToken when all commands use protobuf
+
+
+  //----------------------------------------------------------------------------
   //! Split given string based on the delimiter
   //!
   //! @param str given string
