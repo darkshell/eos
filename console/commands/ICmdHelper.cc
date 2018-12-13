@@ -163,14 +163,19 @@ ICmdHelper::GetError()
   return mMgmExec.GetError();
 }
 
-// #TODO put tokenizer and token as class field
+
 bool
 ICmdHelper::next_token(eos::common::StringTokenizer& tokenizer,
                        std::string& token)
 {
-  if (!(token = tokenizer.GetSToken()).length()) {
+  const char* tmp = tokenizer.GetToken();
+
+  //token = (tmp ? tmp : "");
+  if (!tmp) {
+    token = "";
     return false;
   } else {
+    token = tmp;
     return true;
   }
 }

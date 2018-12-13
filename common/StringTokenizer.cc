@@ -169,47 +169,6 @@ StringTokenizer::GetToken(bool escapeand)
     return 0;
   }
 }
-//------------------------------------------------------------------------------
-// Return next parsed space separated token taking into account escaped
-// blanks and quoted strings
-//------------------------------------------------------------------------------
-std::string
-StringTokenizer::GetSToken(bool escapeand)
-{
-  fCurrentArg++;
-
-  if (fCurrentArg < (int) fLineArgs.size()) {
-    // patch out quotes
-    XrdOucString item = fLineArgs[fCurrentArg].c_str();
-
-    if (item.beginswith("\"")) {
-      item.erase(0, 1);
-    }
-
-    if (item.endswith("\"") &&
-        (!item.endswith("\\\""))) {
-      item.erase(item.length() - 1);
-    }
-
-    if (escapeand) {
-      int pos = 0;
-
-      while ((pos = item.find("&", pos)) != STR_NPOS) {
-        if ((pos == 0) || (item[pos - 1] != '\\')) {
-          item.erase(pos, 1);
-          item.insert("#AND#", pos);
-        }
-
-        pos++;
-      }
-    }
-
-    fLineArgs[fCurrentArg] = item.c_str();
-    return fLineArgs[fCurrentArg];
-  } else {
-    return "";
-  }
-}
 
 bool
 StringTokenizer::IsUnsignedNumber(const std::string& str)
