@@ -75,12 +75,10 @@ extern int com_fuse(char*);
 extern int com_fusex(char*);
 extern int com_geosched(char*);
 extern int com_group(char*);
-extern int com_protogroup(char*);   //
 extern int com_health(char*);
 extern int com_help(char*);
 extern int com_info(char*);
 extern int com_io(char*);
-extern int com_protoio(char*);      //
 extern int com_json(char*);
 extern int com_license(char*);
 extern int com_ln(char*);
@@ -118,6 +116,8 @@ extern int com_vst(char*);
 extern int com_whoami(char*);
 extern int com_who(char*);
 extern int com_accounting(char*);
+extern int com_protogroup(char*);   //
+extern int com_protoio(char*);      //
 
 //------------------------------------------------------------------------------
 // Command mapping array
