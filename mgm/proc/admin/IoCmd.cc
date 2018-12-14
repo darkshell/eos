@@ -26,7 +26,7 @@
 #include "mgm/XrdMgmOfs.hh"
 #include "mgm/Iostat.hh"
 
-#include "mgm/FsView.hh"
+//#include "mgm/FsView.hh"
 
 EOSMGMNAMESPACE_BEGIN
 
@@ -70,14 +70,9 @@ IoCmd::ProcessRequest() noexcept
   return reply;
 }
 
-int StatSubcmd(const eos::console::IoProto_StatProto& stat,
-               eos::console::ReplyProto& reply)
+int IoCmd::StatSubcmd(const eos::console::IoProto_StatProto& stat,
+                      eos::console::ReplyProto& reply)
 {
-  std::string
-  stdOut; // #TODO remove these. Why cant see the ones in IProcCommand?
-  std::string stdErr;
-  //int retc;
-
   // If nothing is selected, we show the summary information
   if (!(stat.apps() | stat.domain() | stat.top() | stat.details())) {
     //stat.set_summary(true);
@@ -95,20 +90,16 @@ int StatSubcmd(const eos::console::IoProto_StatProto& stat,
   return SFS_OK; //TOCK is this needed?
 }
 
-int EnableSubcmd(const eos::console::IoProto_EnableProto& enable,
-                 eos::console::ReplyProto& reply)
+int IoCmd::EnableSubcmd(const eos::console::IoProto_EnableProto& enable,
+                        eos::console::ReplyProto& reply)
 {
-  std::string
-  stdOut; // #TODO remove these. Why cant see the ones in IProcCommand?
-  std::string stdErr;
-  int retc;
-
   if ((!enable.reports()) && (!enable.namespacex())) {
     if (enable.upd_address().length()) {
       if (gOFS->IoStats->AddUdpTarget(enable.upd_address().c_str())) {
-        stdOut += "success: enabled IO udp target " + enable.upd_address();
+        stdOut += ("success: enabled IO udp target " + enable.upd_address()).c_str();
       } else {
-        stdErr += "error: IO udp target was not configured " + enable.upd_address();
+        stdErr += ("error: IO udp target was not configured " +
+                   enable.upd_address()).c_str();
         retc = EINVAL;
       }
     } else {
@@ -153,20 +144,16 @@ int EnableSubcmd(const eos::console::IoProto_EnableProto& enable,
   return SFS_OK;
 }
 
-int DisableSubcmd(const eos::console::IoProto_DisableProto& disable,
-                  eos::console::ReplyProto& reply)
+int IoCmd::DisableSubcmd(const eos::console::IoProto_DisableProto& disable,
+                         eos::console::ReplyProto& reply)
 {
-  std::string
-  stdOut; // #TODO remove these. Why cant see the ones in IProcCommand?
-  std::string stdErr;
-  int retc;
-
   if ((!disable.reports()) && (!disable.namespacex())) {
     if (disable.upd_address().length()) {
       if (gOFS->IoStats->RemoveUdpTarget(disable.upd_address().c_str())) {
-        stdOut += "success: disabled IO udp target " + disable.upd_address();
+        stdOut += ("success: disabled IO udp target " + disable.upd_address()).c_str();
       } else {
-        stdErr += "error: IO udp target was not configured " + disable.upd_address();
+        stdErr += ("error: IO udp target was not configured " +
+                   disable.upd_address()).c_str();
         retc = EINVAL;
       }
     } else {
@@ -209,29 +196,20 @@ int DisableSubcmd(const eos::console::IoProto_DisableProto& disable,
   return SFS_OK;
 }
 
-int ReportSubcmd(const eos::console::IoProto_ReportProto& report,
-                 eos::console::ReplyProto& reply)
+int IoCmd::ReportSubcmd(const eos::console::IoProto_ReportProto& report,
+                        eos::console::ReplyProto& reply)
 {
-  std::string
-  stdOut; // #TODO remove these. Why cant see the ones in IProcCommand?
-  std::string stdErr;
-  int retc;
-
-  if (true /*mVid.uid == 0*/) {
+  if (mVid.uid == 0) {
     retc = Iostat::NamespaceReport(report.path().c_str(), stdOut, stdErr);
   }
 
   return retc;
 }
 
-int NsSubcmd(const eos::console::IoProto_NsProto& ns,
-             eos::console::ReplyProto& reply)
+int IoCmd::NsSubcmd(const eos::console::IoProto_NsProto& ns,
+                    eos::console::ReplyProto& reply)
 {
   std::string option;
-  std::string
-  stdOut; // #TODO remove these. Why cant see the ones in IProcCommand?
-  std::string stdErr;
-  int retc;
 
   if (ns.monitoring()) {
     option += "-m";
@@ -270,15 +248,14 @@ int NsSubcmd(const eos::console::IoProto_NsProto& ns,
     option += "-a";
     break;
 
-  default :
-    // NONE
+  default : // NONE
     stdErr = "error: illegal parameter 'count'";
     retc = EINVAL;
     break;
   }
 
   eos_static_info("io ns");
-  gOFS->IoStats->PrintNs(stdOut, option);
+  gOFS->IoStats->PrintNs(stdOut, option.c_str());
   reply.set_std_out(stdOut.c_str());
   reply.set_std_err(stdErr.c_str());
   reply.set_retc(retc);
