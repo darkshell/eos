@@ -114,7 +114,8 @@ add_library(
   commands/com_proto_recycle.cc
   commands/com_stagerrm.cc
   commands/com_proto_group.cc
-  commands/com_proto_io.cc)
+  commands/com_proto_io.cc
+  commands/com_proto_debug.cc)
 
 add_dependencies(EosConsoleCommands-Objects EosCliProto-Objects)
 add_dependencies(EosConsoleCommands-Objects EosFstProto-Objects)

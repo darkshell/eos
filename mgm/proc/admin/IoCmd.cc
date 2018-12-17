@@ -26,7 +26,6 @@
 #include "mgm/XrdMgmOfs.hh"
 #include "mgm/Iostat.hh"
 
-//#include "mgm/FsView.hh"
 
 EOSMGMNAMESPACE_BEGIN
 
