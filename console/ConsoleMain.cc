@@ -118,6 +118,7 @@ extern int com_who(char*);
 extern int com_accounting(char*);
 extern int com_protogroup(char*);   //
 extern int com_protoio(char*);      //
+extern int com_protodebug(char*);      //
 
 //------------------------------------------------------------------------------
 // Command mapping array
@@ -136,7 +137,8 @@ COMMAND commands[] = {
   { (char*) "config", com_config, (char*) "Configuration System"},
   { (char*) "console", com_console, (char*) "Run Error Console"},
   { (char*) "cp", com_cp, (char*) "Cp command"},
-  { (char*) "debug", com_debug, (char*) "Set debug level"},
+  // { (char*) "debug", com_debug, (char*) "Set debug level"},
+  { (char*) "debug", com_protodebug, (char*) "Set debug level"},
   { (char*) "exit", com_quit, (char*) "Exit from EOS console"},
   { (char*) "file", com_file, (char*) "File Handling"},
   { (char*) "fileinfo", com_fileinfo, (char*) "File Information"},
